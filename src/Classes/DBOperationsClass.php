@@ -108,27 +108,7 @@ class DataOperation extends Database{
         return $array;
         $this->con->close();
     }
-
-    public function select_records_where($field , $table, $where){
-
-        $sql = "";
-
-
-        $sql .= "SELECT $field FROM ".$table." WHERE ".$where;
-
-        $array = array();
-        $query = mysqli_query($this->con, $sql);
-
-        while($row = mysqli_fetch_assoc($query)){
-            $array[] = $row;
-        }
-        return $array;
-        $this->con->close();
-    }
-
-
-
-
+    
     public function select_distinct_records($table, $where, $group_by){
         
         $sql = "";

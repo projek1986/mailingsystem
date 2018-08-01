@@ -35,7 +35,7 @@ header("Pragma: no-cache");
 // Uncomment this one to fake upload time
 // usleep(5000);
 // Settings
-$targetDir = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . "uploads" . DIRECTORY_SEPARATOR . "catalog";
+$targetDir = $_SERVER["DOCUMENT_ROOT"] . DIRECTORY_SEPARATOR . "assets" . DIRECTORY_SEPARATOR . "file";
 //$targetDir = 'uploads';
 
 

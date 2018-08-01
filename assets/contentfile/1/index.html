@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--[if !mso]><!-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!--[if (gte mso 9)|(IE)]>
+    <style type="text/css">
+        table {border-collapse: collapse;}
+    </style>
+    <![endif]-->
+	
+	<style>
+		/* Basics */
+		
+		body {
+			margin: 0 !important;
+			padding: 0;
+			background-color: #ffffff;
+		}
+		
+		table {
+			border-spacing: 0;
+			font-family: sans-serif;
+			color: #333333;
+                        vertical-align: top;
+		}
+		
+		td {
+			padding: 0;
+                        vertical-align: top;
+		}
+		
+		img {
+			border: 0;
+		}
+		
+		div[style*="margin: 16px 0"] { 
+			margin:0 !important;
+		}
+		
+		.wrapper {
+			width: 100%;
+			table-layout: fixed;
+			-webkit-text-size-adjust: 100%;
+			-ms-text-size-adjust: 100%;
+		}
+		
+		.webkit {
+			max-width: 600px;
+			margin: 0 auto;
+		}
+		
+		.full-width-image img {
+			width: 100%;
+			max-width: 600px;
+			height: auto;
+		}
+		
+		.inner {
+			padding: 0px 10px 10px 0px;
+		}
+		
+		p {
+			Margin: 0;
+		}
+                
+                p.pmargin{
+                        margin-bottom: 10px;
+                }
+                
+		.h1 {
+			font-size: 21px;
+			font-weight: bold;
+			Margin-bottom: 18px;
+		}
+		
+		.h2 {
+			font-size: 18px;
+			font-weight: bold;
+			Margin-bottom: 12px;
+		}
+		 
+		/* One column layout */
+		
+		.one-column .contents {
+			text-align: left;
+		}
+		.one-column p {
+			font-size: 14px;
+			Margin-bottom: 10px;
+		}
+		
+		/*Two column layout*/
+		.two-column {
+			text-align: center;
+			font-size: 0;
+		}
+		
+		.two-column .column {
+			width: 100%;
+			max-width: 300px;
+			display: inline-block;
+			vertical-align: top;
+		}
+		.contents {
+			width: 100%;
+		}
+		.two-column .contents {
+			font-size: 14px;
+			text-align: left;
+		}
+		.two-column img {
+			width: 100%;
+			max-width: 280px;
+			height: auto;
+		}
+		.two-column .text {
+			padding-top: 10px;
+		}
+		
+		/*Three column layout*/
+		
+		.three-column {
+			text-align: center;
+			font-size: 0;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		.three-column .column {
+			width: 100%;
+			max-width: 200px;
+			display: inline-block;
+			vertical-align: top;
+		}
+		.three-column .contents {
+			font-size: 14px;
+			text-align: center;
+		}
+		.three-column img {
+			width: 100%;
+			max-width: 180px;
+			height: auto;
+		}
+		.three-column .text {
+			padding-top: 10px;
+		}
+		
+		/* Right sidebar layout */
+		
+		.right-sidebar {
+			text-align: center;
+			font-size: 0;
+		}
+		.right-sidebar .column {
+			width: 100%;
+			display: inline-block;
+			vertical-align: top;
+		}
+		
+		.right-sidebar .left {
+			max-width: 500px;
+		}
+		
+		.right-sidebar .right {
+			max-width: 100px;
+/*                        padding-left: 10px;*/
+		}
+		.right-sidebar .img {
+			width: 100%;
+			max-width: 100px;
+			height: auto;
+		}
+		
+		.right-sidebar .contents {
+                        font-size: 14px;
+			text-align: center;
+		}
+                
+                /* Right sidebar inwerse */
+                
+		.right-sidebar-inverse {
+                       text-align: center;
+                       font-size: 0;
+		}
+		.right-sidebar-inverse .column {
+			width: 100%;
+			display: inline-block;
+			vertical-align: top;
+		}
+		.right-sidebar-inverse .left {
+                	max-width: 99px;
+		}
+		.right-sidebar-inverse .right {
+                     
+			max-width: 396px;
+		}
+		.right-sidebar-inverse .column .right img {
+			width: 100%;
+			max-width: 396px;
+			height: auto;
+		}
+                .right-sidebar-inverse .column .left img {
+			width: 100%;
+			max-width: 30px;
+			height: auto;
+		}
+		.right-sidebar-inverse .contents {
+			font-size: 14px;
+			text-align: left;
+		}
+			
+		/*Media Queries*/
+		@media screen and (max-width: 400px) {
+		
+			.two-column .column,
+			.three-column .column {
+				max-width: 100% !important;
+			}
+			.two-column img {
+				max-width: 100% !important;
+			}
+			.three-column img {
+				max-width: 50% !important;
+			}
+		}
+		
+		@media screen and (min-width: 401px) and (max-width: 620px) {
+		.three-column .column {
+				max-width: 33% !important;
+			}
+			.two-column .column {
+				max-width: 50% !important;
+			}
+		}
+                
+                
+                /*Visa style*/
+                
+               .lead{
+                    font-weight: bold;
+                    text-align: justify;
+                    font-size: 14px;
+                    color: #0023a0;
+                }
+                
+                .content{
+                    font-size: 13px;
+                    color: #000;
+                    text-align: justify;
+                }
+                .link_style{
+                    text-decoration: none!important;
+                    color: #0023a0!important;
+                }
+	        .inner-img{
+                    vertical-align: top;
+                }
+                
+		.contents {
+			width: 100%;
+		}
+
+		
+	</style>
+</head>
+<body>
+    <center class="wrapper">
+        <div class="webkit">
+		
+           <!--[if (gte mso 9)|(IE)]>
+			<table width="600" align="center">
+			<tr>
+			<td>
+			<![endif]-->
+			<table class="outer" align="center">
+                            
+				<tr>
+					<td>
+						<img src="cid:visa_header.png" width="600" alt="" />
+					</td>
+				</tr>
+				
+
+				
+				<tr>
+					<td class="right-sidebar">
+						<!--[if (gte mso 9)|(IE)]>
+						<table width="100%">
+						<tr>
+						<td width="500">
+						<![endif]-->
+						<div class="column left">
+							<table width="100%">
+								<tr>
+                                                                    <td class="lead">
+                                                                            <p class="pmargin">
+                                                                                Drodzy Państwo!<br /><br />
+                                                                                Serdecznie zapraszamy na tegoroczne spotkanie 
+                                                                                Visa Innovation Conference, dotyczące rozwoju nowoczesnych 
+                                                                                płatności - w poniedziałek 19 marca o godzinie 9:00 w hotelu Marriott w Warszawie.                                   
+                                                                            </p>
+									</td>
+									
+								</tr>
+							</table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td><td width="100">
+						<![endif]-->
+						<div class="column right">
+							<table width="100%">
+								<tr>
+									<td class="inner-img">
+										<img src="cid:19_marca.png" width="100" alt="" />
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td>
+						</tr>
+						</table>
+						<![endif]-->
+					</td>
+				</tr>
+                            
+                            
+                            
+                                <tr>
+					<td class="right-sidebar">
+						<!--[if (gte mso 9)|(IE)]>
+						<table width="100%">
+						<tr>
+						<td width="500">
+						<![endif]-->
+						<div class="column left">
+							<table width="100%">
+								<tr>
+                                                                    <td class="content">
+                                                                        <p class="pmargin">
+                                                                            Ramowy program tej konferencji przesyłamy w załączniku. Jak Państwo zobaczą:
+                                                                        </p>
+                                                                            <ul>
+                                                                                <li>wskażemy priorytety, na których Visa skupia uwagę w obszarze innowacji
+                                                                                    w Europie</li>
+                                                                                <li>podsumujemy wspólnie z bankami efekty dotychczasowych prac
+                                                                                    warszawskiego Inkubatora Innowacji Visa</li>
+                                                                                <li>przyjrzymy się zmianom regulacyjnym w Europie i ich wpływowi 
+                                                                                    na nasz biznes</li>
+                                                                            </ul>
+                                                                        
+                                                                    </td>
+								</tr>
+							</table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td><td width="100">
+						<![endif]-->
+						<div class="column right">
+							<table width="100%">
+								<tr>
+									<td class="inner-img">
+										<img src="cid:godzina9.jpg" width="100" alt="" />
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td>
+						</tr>
+						</table>
+						<![endif]-->
+					</td>
+				</tr>
+                            				
+	
+
+                            
+                                <tr>
+					<td class="right-sidebar">
+						<!--[if (gte mso 9)|(IE)]>
+						<table width="100%">
+						<tr>
+						<td width="500">
+						<![endif]-->
+						<div class="column left">
+							<table width="100%">
+								<tr>
+                                                                        <td class="content">
+                                                                            <p class="pmargin">
+                                                                                Poza prelegentami z Visa będziemy gościć przedstawicieli Garmin oraz NFC Ring, 
+                                                                                którzy przygotowali dla Państwa kilka niespodzianek. Nie odkrywając wszystkich kart, 
+                                                                                powiemy tak: warto przyjść i warto zostać z nami do końca tego dnia…<br /><br />
+
+                                                                                Wszystkim z Państwa, którzy już potwierdzili swój udział, dziękujemy. 
+                                                                                Tych z Państwa, którzy jeszcze tego nie zrobili prosimy o informację mailem na 
+                                                                                adres <a class ="link_style" href="mailto:visawarszawa@visa.com">visawarszawa@visa.com</a> 
+                                                                                lub telefonicznie pod numerem 22 630 68 01. 
+                                                                            </p>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td><td width="100">
+						<![endif]-->
+						<div class="column right">
+							<table width="100%">
+								<tr>
+									<td class="inner-img">
+										<img src="cid:ring.jpg" width="100" alt="" />
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td>
+						</tr>
+						</table>
+						<![endif]-->
+					</td>
+				</tr>
+                            
+                                <tr>
+					<td class="right-sidebar">
+						<!--[if (gte mso 9)|(IE)]>
+						<table width="100%">
+						<tr>
+						<td width="500">
+						<![endif]-->
+						<div class="column left">
+							<table width="100%">
+								<tr>
+                                                                        <td class="content">
+                                                                            <p class="pmargin">
+                                                                                Z poważaniem,<br/><br/>
+
+                                                                                Adrian Kurowski, Dyrektor Visa w Polsce<br/><br/>
+
+                                                                                Sebastian Geldner, Innovation and Strategic Partnerships, Visa <br/><br/>
+                                                                            </p>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td><td width="100">
+						<![endif]-->
+						<div class="column right">
+							<table width="100%">
+								<tr>
+									<td class="inner">
+								
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td>
+						</tr>
+						</table>
+						<![endif]-->
+					</td>
+				</tr>
+                            
+                            
+                            
+                            
+                                <tr>
+					<td class="right-sidebar">
+						<!--[if (gte mso 9)|(IE)]>
+						<table width="100%">
+						<tr>
+						<td width="500">
+						<![endif]-->
+						<div class="column left">
+                                                    <table width="100%"  >
+                                                        <tr>
+                                                            <td class="right-sidebar-inverse" dir="rtl">
+                                                                    <!--[if (gte mso 9)|(IE)]>
+                                                                    <table width="100%" dir="rtl">
+                                                                    <tr>
+                                                                    <td width="99">
+                                                                    <![endif]-->
+                                                                    <div class="column left" dir="ltr">
+                                                                        <table width="100%">
+                                                                            <tr>
+                                                                                <td class="contents">
+                                                                                    <table class="contents">
+                                                                                        <tr>
+                                                                                            <td style="text-align:center;padding-top:0;padding-bottom:0;padding-right:3px;vertical-align:top;" >
+                                                                                                    <a href="https://pl-pl.facebook.com/Visa/" >
+                                                                                                            <img src="cid:fb.png" width="30" alt="Visa fb" border="0" style="border-width:0;" />
+                                                                                                    </a>
+                                                                                            </td>
+                                                                                            <td  style="text-align:center;padding-top:0;padding-bottom:0;padding-right:3px;vertical-align:top;" >
+                                                                                                    <a href="http://twitter.com/Visa_PL"  >
+                                                                                                            <img src="cid:twitter.png" width="30" alt="Visa Twitter" border="0" style="border-width:0;" />
+                                                                                                    </a>
+                                                                                            </td>
+                                                                                            <td style="text-align:center;padding-top:0;padding-bottom:0;padding-right:3px;vertical-align:top;" >
+                                                                                                    <a href="https://www.instagram.com/visapl/"  >
+                                                                                                            <img src="cid:insta.png" width="30" alt="Visa instagram" border="0" style="border-width:0;" />
+                                                                                                    </a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                    <!--[if (gte mso 9)|(IE)]>
+                                                                    </td><td width="396">
+                                                                    <![endif]-->
+                                                                    <div class="column right" dir="ltr">
+                                                                            <table width="100%">
+                                                                                    <tr>
+                                                                                            <td class="inner contents">
+                                                                                                <a href="https://www.visa.pl/" >
+                                                                                                    <img src="cid:visa_footer.png" width="396" alt="Visa" border="0" style="border-width:0;" />
+                                                                                                </a>
+                                                                                            </td>
+                                                                                    </tr>
+                                                                            </table>
+                                                                    </div>
+                                                                    <!--[if (gte mso 9)|(IE)]>
+                                                                    </td>
+                                                                    </tr>
+                                                                    </table>
+                                                                    <![endif]-->
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td><td width="100">
+						<![endif]-->
+						<div class="column right">
+							<table width="100%">
+								<tr>
+									<td class="inner">
+                                                                            
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!--[if (gte mso 9)|(IE)]>
+						</td>
+						</tr>
+						</table>
+						<![endif]-->
+					</td>
+				</tr>
+                               
+                            
+                            
+
+
+				
+			</table>
+			<!--[if (gte mso 9)|(IE)]>
+			</td>
+			</tr>
+			</table>
+			<![endif]-->
+		   
+        </div>
+    </center>
+</body>
+</html>

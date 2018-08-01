@@ -6,6 +6,7 @@
     <div class="dropdown-container">
         <a href="/panel_page/msglist">Lista</a>
         <a href="/panel_page/msg">Dodaj nową</a>
+        <a href="/panel_page/msgplik">Dodaj nową z pliku</a>
 
     </div>
 
@@ -13,15 +14,15 @@
         <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-container">
-        <a href="/panel_page/msglist">Grupy</a>
-        <a href="/panel_page/msglist">Lista</a>
-        <a href="/panel_page/msglist">Nowy</a>
-        <a href="/panel_page/msg">Importuj z pliku csv</a>
+        <a href="/panel_page/grupanew">Grupy</a>
+        <a href="/panel_page/grupalist">Lista</a>
+        <a href="/panel_page/subsnew">Nowy</a>
+        <a href="/panel_page/csv">Importuj z pliku csv</a>
 
     </div>
 
-    <a href="#services">Raporty</a>
-    <a href="#clients">Wysyłka</a>
+    <a href="/panel_page/reports">Raporty</a>
+    <a href="/panel_page/sendmsg">Wysyłka</a>
 
 
     <a href="/logout">Wyloguj się</a>

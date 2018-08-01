@@ -73,18 +73,26 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tytuł Projektu</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Tytuł Projektu">
+                    <input type="text" name="title_projekt" class="form-control" id="exampleInputEmail1" placeholder="Tytuł Projektu">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tytuł meila</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Tytuł meila">
+                    <input type="text" name="title_msg" class="form-control" id="exampleInputEmail1" placeholder="Tytuł meila">
                 </div>
 
                 <div class="form-group">
                     <label for="postContent" >Treść: </label>
 
-                        <textarea rows="20" cols="50" class="form-control" name="content" ><?= isset($records["content"]) ? $records["content"] : ''?></textarea>
+                        <textarea rows="20"  cols="50" class="form-control" name="content_msg" ><?= isset($records["content"]) ? $records["content"] : ''?></textarea>
 
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Załączniki</label>
+
+                        <input id="input-ke-3" name="files[]" type="file" multiple class="file-loading">
+
+                       </div>
                 </div>
 
 
@@ -98,5 +106,72 @@
     </div>
 </div>
 
+    <script>
+
+        var krajeeGetCount = function(id) {
+            var cnt = $('#' + id).fileinput('getFilesCount');
+            return cnt === 0 ? 'You have no files remaining.' :
+                'You have ' +  cnt + ' file' + (cnt > 1 ? 's' : '') + ' remaining.';
+        };
+
+    $("#input-ke-3").fileinput({
+        language: "pl",
+//        uploadUrl: "/file-upload-batch/1",
+        uploadAsync: false,
+        showUpload: false ,
+        overwriteInitial: true,
+        initialPreview: [
+            // IMAGE RAW MARKUP
+
+
+        ],
+        initialPreviewAsData: true, // defaults markup
+    //    initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+        initialPreviewConfig: [
+
+        //    {previewAsData: false, url: "/site/file-delete", key: 9}
+
+        ],
+
+        initialPreviewShowDelete: false,
+        uploadExtraData: {
+            img_key: "1000",
+            img_keywords: "happy, nature",
+        }
+
+    }).on('filebeforedelete', function() {
+        return new Promise(function(resolve, reject) {
+            $.confirm({
+                title: 'Confirmation!',
+                content: 'Are you sure you want to delete this file?',
+                type: 'red',
+                buttons: {
+                    ok: {
+                        btnClass: 'btn-primary text-white',
+                        keys: ['enter'],
+                        action: function(){
+                            resolve();
+                        }
+                    },
+                    cancel: function(){
+                        $.alert('File deletion was aborted! ' + krajeeGetCount('input-ke-3'));
+                    }
+                }
+            });
+        });
+    }).on('filedeleted', function() {
+        setTimeout(function() {
+            $.alert('File deletion was successful! ' + krajeeGetCount('input-ke-3'));
+        }, 900);
+    });
+
+</script>
+
+
 <script>tinymce.init({ selector:'textarea' });</script>
+
+<!------plupload------>
+
+
+
 
