@@ -85,7 +85,7 @@
                     <div class="form-group">
                         <label>Kontent z pliku html</label>
 
-                        <input id="input-ke-1" name="file_content[]" type="file" multiple class="file-loading">
+                        <input id="input-ke-11" name="file_content[]" type="file" multiple >
 
                     </div>
                 </div>
@@ -112,7 +112,10 @@
 
 
                 <button type="submit" class="btn btn-default">Zapisz</button>
-
+<br>
+<br>
+<br>
+<br>
             </form>
 
 

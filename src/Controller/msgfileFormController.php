@@ -112,7 +112,7 @@ if (isset($_POST)) {
         }
 
 
-          echo("<script>location.href = '/panel_page/msgfile#openModal'</script>");
+          echo("<script>location.href = '/panel_page/msgplik#openModal'</script>");
     }
 
 }

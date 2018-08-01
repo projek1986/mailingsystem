@@ -1,3 +1,15 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'src/Classes/DataOperation.php';
+
+$objdb = new DataOperation;
+
+
+    $records = $objdb->select_records_where('*', 'msg' , true);
+
+
+?>
+
+
 <div class="container">
     <div class="row">
 
@@ -11,14 +23,32 @@
                     <th style = "text-align:center;">Tytuł wiadomości</th>
                     <th style = "text-align:center;">Plik</th>
                     <th style = "text-align:center;">Data dodania</th>
-                    <th style = "text-align:center;">Zarchiwizowany</th>
                     <th style = "text-align:center;">Zarządzaj</th>
 
                 </tr>
                 </thead>
 
                 <tbody>
+                <?php
+                if (isset($records) && !empty($records)) { ?>
 
+                    <?php foreach ($records as $sub) { ?>
+
+                        <tr>
+                            <td><?php echo $sub['id']; ?></td>
+                            <td><?php echo $sub['title_projekt']; ?></td>
+                            <td><?php echo $sub['title_msg']; ?></td>
+                            <td><?php echo $sub['file_content']; ?></td>
+                            <td><?php echo $sub['create_date']; ?></td>
+                            <td>--</td>
+
+
+                        </tr>
+
+
+
+                    <?php } ?>
+                <?php } ?>
 
 
                 </tbody>
