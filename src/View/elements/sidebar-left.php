@@ -15,14 +15,25 @@
     </button>
     <div class="dropdown-container">
         <a href="/panel_page/grupanew">Grupy</a>
-        <a href="/panel_page/grupalist">Lista</a>
+<!--        <a href="/panel_page/grupalist">Lista</a>-->
         <a href="/panel_page/subsnew">Nowy</a>
         <a href="/panel_page/csv">Importuj z pliku csv</a>
 
     </div>
 
     <a href="/panel_page/reports">Raporty</a>
-    <a href="/panel_page/sendmsg">Wysyłka</a>
+
+
+    <button class="dropdown-btn">Wysyłka
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <a href="/panel_page/sendmsg">Tworzenie listy dla Crona </a>
+        <!--        <a href="/panel_page/grupalist">Lista</a>-->
+        <a href="/panel_page/sendmsgendcron">Wysyłka bez Crona </a>
+
+    </div>
+
 
 
     <a href="/logout">Wyloguj się</a>

@@ -1,4 +1,17 @@
 <?php
+
+include_once $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'src/Classes/DataOperation.php';
+
+$objdb = new DataOperation;
+
+if (isset($_GET) && !empty($_GET['id'])) {
+
+    $records_sub = $objdb->select_record('msg', array("id" => $_GET['id']));
+
+    $records_file = $objdb->select_records('msgfile', array("msg_id" => $_GET['id']));
+
+
+}
 ?>
 <div id="openModal" class="modalDialog">
     <div>
@@ -73,17 +86,17 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tytuł Projektu</label>
-                    <input type="text" name="title_projekt" class="form-control" id="exampleInputEmail1" placeholder="Tytuł Projektu">
+                    <input  value="<?php echo !empty($records_sub['title_projekt']) ? $records_sub['title_projekt'] : ''; ?>" type="text" name="title_projekt" class="form-control" id="exampleInputEmail1" placeholder="Tytuł Projektu">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tytuł meila</label>
-                    <input type="text" name="title_msg" class="form-control" id="exampleInputEmail1" placeholder="Tytuł meila">
+                    <input value="<?php echo !empty($records_sub['title_msg']) ? $records_sub['title_msg'] : ''; ?>" type="text" name="title_msg" class="form-control" id="exampleInputEmail1" placeholder="Tytuł meila">
                 </div>
 
                 <div class="form-group">
                     <label for="postContent" >Treść: </label>
 
-                        <textarea rows="20"  cols="50" class="form-control" name="content_msg" ><?= isset($records["content"]) ? $records["content"] : ''?></textarea>
+                        <textarea rows="20"  cols="50" class="form-control" name="content_msg" ><?php echo !empty($records_sub['content_msg']) ? $records_sub['content_msg'] : ''; ?></textarea>
 
                 </div>
                 <div class="form-group">
@@ -94,7 +107,37 @@
 
                        </div>
                 </div>
+                <?php
+                if (isset($records_file) && !empty($records_file)) {
 
+                    foreach ($records_file as $file) { ?>
+
+
+                        <table class=" table table-condensed">
+                            <tr>
+                                <td width="60%">
+                                    <br>
+                                    <p><?php echo $file['namefile']; ?></p>
+
+                                </td>
+                                <td></td>
+                                <td style="vertical-align: middle;">
+                                    <?php echo '<a href="/file_delete/' . $file['id'] . '/' . $file['msg_id'] . '" class="btn btn-danger small-buttons" role="button" onclick =\'return confirm ("Na pewno chcesz usunąć?")\'>Usuń</a>'; ?>
+
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                    <?php } ?>
+                <?php } ?>
+
+                <?php
+                if (isset($_GET) && !empty($_GET['id'])) { ?>
+
+                    <input type="hidden" name="update" value="<?php echo $_GET['id']; ?>">
+                <?php } ?>
 
                 <button type="submit" class="btn btn-default">Submit</button>
 

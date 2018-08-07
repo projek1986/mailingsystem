@@ -90,6 +90,7 @@ class send extends DataOperation
                         'send' => 0,
                         'group_id' => isset($send_grup_id) ? $send_grup_id : '',
                         'msg_id' => isset($id_msg) ? $id_msg : '',
+                        'cron' => 1,
 
                     );
 
@@ -178,7 +179,7 @@ class send extends DataOperation
 
         $wys_mailer = $this->select_records_limit('sub_send_info', array('send' => 0), 100);
 
-      //  echo '<pre>';
+        //  echo '<pre>';
 
         $i = 0;
 
@@ -199,7 +200,7 @@ class send extends DataOperation
 
             if ($i == count($wys_mailer)) {
 
-                $this->runPHPMailer($settings_obj->from_email_settings, $settings_obj, $this->sendReports($wys_mailer[$i]['msg_id']));
+                $this->runPHPMailer($settings_obj->from_email_settings, $settings_obj, $this->sendReports($wys_mailer[$i]['msg_id'] , 1) );
 
             }
 
@@ -208,13 +209,13 @@ class send extends DataOperation
     }
 
 
-    public function createStatictics($reports_id)
+    public function createStatictics($reports_id , $cron)
     {
 
-        $number_of_recipients_result = $this->my_query('SELECT COUNT(id) FROM sub_send_info WHERE msg_id = ' . $reports_id);
-        $delivered_status_result = $this->my_query('SELECT COUNT(id) FROM sub_send_info WHERE msg_id  = ' . $reports_id . ' AND status = 1 AND send = 1');
-        $number_of_attempts_result = $this->my_query('SELECT COUNT(id) FROM sub_send_info WHERE msg_id = ' . $reports_id . ' AND status = 1');
-        $number_of_errors_result = $this->my_query('SELECT COUNT(id) FROM sub_send_info WHERE msg_id =' . $reports_id . ' AND error  != ""');
+        $number_of_recipients_result = $this->my_query('SELECT COUNT(id) FROM sub_send_info WHERE msg_id = ' . $reports_id .' AND CRON = '.$cron);
+        $delivered_status_result = $this->my_query('SELECT COUNT(id) FROM sub_send_info WHERE msg_id  = ' . $reports_id . ' AND status = 1 AND send = 1 AND CRON = '.$cron);
+        $number_of_attempts_result = $this->my_query('SELECT COUNT(id) FROM sub_send_info WHERE msg_id = ' . $reports_id . ' AND status = 1 AND CRON = '.$cron);
+        $number_of_errors_result = $this->my_query('SELECT COUNT(id) FROM sub_send_info WHERE msg_id =' . $reports_id . ' AND error  != "" AND CRON = '.$cron);
 
 
         $number_of_recipients = !empty($number_of_recipients_result) ? mysqli_fetch_assoc($number_of_recipients_result) : '';
@@ -223,18 +224,34 @@ class send extends DataOperation
         $number_of_errors = !empty($number_of_errors_result) ? mysqli_fetch_assoc($number_of_errors_result) : '';
 
 
+        $data_in= array(
+            'msg_id'=>$reports_id,
+            'number_of_recipients' => isset($number_of_recipients['COUNT(id)']) ? $number_of_recipients['COUNT(id)'] : 0,
+            'delivered_messages' => isset($delivered_status['COUNT(id)']) ? $delivered_status['COUNT(id)'] : 0,
+            'number_of_attempts' => isset($number_of_attempts ['COUNT(id)']) ? $number_of_attempts ['COUNT(id)'] : 0,
+            'number_of_errors' => isset($number_of_errors['COUNT(id)']) ? $number_of_errors['COUNT(id)'] : 0,
+            'start_at' => date('Y-m-d H:i'),
+
+        );
+
+        $this->insert_record('reports' ,$data_in );
+
+
         return array(
             'number_of_recipients' => isset($number_of_recipients['COUNT(id)']) ? $number_of_recipients['COUNT(id)'] : 'Brak informacji',
             'delivered_messages' => isset($delivered_status['COUNT(id)']) ? $delivered_status['COUNT(id)'] : 'Brak informacji',
             'number_of_attempts' => isset($number_of_attempts ['COUNT(id)']) ? $number_of_attempts ['COUNT(id)'] : 'Brak informacji',
             'number_of_errors' => isset($number_of_errors['COUNT(id)']) ? $number_of_errors['COUNT(id)'] : 'Brak informacji'
         );
+
+
+
     }
 
-    public function sendReports($reports_id)
+    public function sendReports($reports_id , $cron)
     {
 
-        $statistics = $this->createStatictics($reports_id);
+        $statistics = $this->createStatictics($reports_id , $cron);
 
         $subject = 'Raport z wysłania wiadomości: ';
 
@@ -243,7 +260,7 @@ class send extends DataOperation
             . '<p>Podjęto próbę do: ' . $statistics['number_of_attempts'] . '</p>'
             . '<p>Wysłano do: ' . $statistics['delivered_messages'] . '</p>'
             . '<p>Błędów: ' . $statistics['number_of_errors'] . '</p>'
-            . '<p>Pozdrawiamy,<br /> mediacyfrowe.pl</p>';
+            . '<p>Pozdrawiamy,<br /> </p>';
 
         return array(
             'subject' => isset($subject) ? $subject : 'brak tematu',
@@ -254,5 +271,72 @@ class send extends DataOperation
         );
 
     }
+
+
+    public function sendmsgnow($send_grup_id, $id_msg)
+    {
+
+
+        $settings_obj = new Settings;
+
+        $email_content = $this->create_mail_content($id_msg);
+
+        if ($send_grup_id != 0) {
+
+            $recipients = $this->select_distinct_records('subscribers', array("sub_grup" => $send_grup_id), 'email');
+
+
+            if (isset($recipients) && !empty($recipients)) {
+
+                $i=0;
+                foreach ($recipients as $recept) {
+
+
+                    if ($this->runPHPMailer($recept['email'], $settings_obj, $email_content)) {
+
+                        $dane = array(
+                            'email' => $recept['email'],
+                            'data_create' => date('Y-m-d H:i'),
+                            'status' => 1,
+                            'send' => 1,
+                            'group_id' => isset($send_grup_id) ? $send_grup_id : '',
+                            'msg_id' => isset($id_msg) ? $id_msg : '',
+                            'cron'=>0
+
+                        );
+
+
+                        $this->insert_record('sub_send_info', $dane);
+
+
+                    }
+
+
+                    $i++;
+
+                    if ($i == count($recipients)) {
+
+                        $this->runPHPMailer($settings_obj->from_email_settings, $settings_obj, $this->sendReports($id_msg , 0));
+
+                    }
+
+
+                }
+
+
+            } else {
+
+                $this->runPHPMailer($settings_obj->from_email_settings, $settings_obj, $email_content);
+            }
+
+
+        } else {
+
+            $this->runPHPMailer($settings_obj->from_email_settings, $settings_obj, $email_content);
+        }
+
+
+    }
+
 
 }

@@ -7,6 +7,16 @@
 
     </div>
 </div>
+
+<div id="openModal2" class="modalDialog">
+    <div>
+        <a href="#close" title="Close" class="close">X</a>
+        <h2>Informacja</h2>
+
+        <p>Rekord Usuniety</p>
+
+    </div>
+</div>
 <style>
     .modalDialog {
         position: fixed;
@@ -113,7 +123,15 @@
                             $lp=1;
                             foreach ($records_grup as $grupa) { ?>
 
-                                <li class="list-group-item"> <?php echo $lp.' ' .$grupa['nazwa'] ?> <a class="btn btn-default" href="/panel_page/grupalist?id=<?php echo $grupa['id'] ?>" role="button">Lista Subskrybentów</a></li>
+                                <li class="list-group-item"> <?php echo $lp.' ' .$grupa['nazwa']; ?>
+                                    <a class="btn btn-default" href="/panel_page/grupalist?id=<?php echo $grupa['id'] ?>" role="button">Lista Subskrybentów</a>
+
+                                    <?php   echo '<a href="/subdelete/' . $grupa['id'] .'" class="btn btn-danger small-buttons" role="button" onclick =\'return confirm ("Na pewno chcesz usunąć?")\'>Usuń</a>'; ?> </td>
+
+                                </li>
+
+
+
 
                             <?php $lp++; ?>
                             <?php } ?>
